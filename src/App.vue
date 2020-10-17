@@ -1,26 +1,46 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <Notes msg="Guo Rui Notes"></Notes>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Notes from "./components/notes";
+import "semantic-ui-css/semantic.min.css";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Notes,
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.notes {
+  margin-top: 32px;
+}
+.notelist {
+  margin-top: 30px;
+}
+
+.notes .ui textarea {
+  border: none;
+  padding: 0;
+  font-size: 16px;
+  margin: 32px 0;
+}
+
+.item > .content > .header {
+  display: block;
+  cursor: pointer;
+}
+.updateTime {
+  width: 88px;
+  color: cadetblue;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.trash.icon {
+  cursor: pointer;
 }
 </style>
