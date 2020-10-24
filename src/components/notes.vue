@@ -4,7 +4,9 @@
       <i class="paw icon"></i>
       Guo Rui's Notes
     </h4>
-    <a class="ui right floated brown button" v-on:click="createNote()"
+    <a
+      class="ui right floated brown button"
+      v-on:click="createNote({ food: '' })"
       >编辑笔记</a
     >
     <div class="zhong"></div>
@@ -32,11 +34,7 @@
       </tbody>
     </table>
     <div class="ui divided items notelist">
-      <Note
-        v-for="note in notes"
-        v-bind:note="note"
-        v-bind:key="note.$loki"
-      ></Note>
+      <Note v-for="note in notes" v-bind:note="note" v-bind:key="note.$loki" />
       <span v-if="!notes.length">如果没有笔记，请点击"添加笔记"按钮</span>
     </div>
   </div>
@@ -50,8 +48,8 @@ import Test from "./test";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  async created() {
-    await this.getNotes();
+  created() {
+    this.getNotes();
   },
   components: {
     Test,

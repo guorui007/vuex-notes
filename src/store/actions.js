@@ -16,15 +16,15 @@ export const getNotes = async ({ commit }) => {
 
 
     //排序以后，提交修稿
-    commit('setnotes', notes)
+    commit('setnotes', notes);
 }
 
-export const createNote = async ({ dispatch }) => {
+export const createNote = async ({ dispatch }, note) => {
     const table = await loadTable('notes');
-    const noteinfo = { food: "" }
-    table.insert(noteinfo)
+
+    table.insert(note)
     db.saveDatabase();
-    dispatch('getNotes')
+    dispatch('getNotes');
 }
 
 /**
@@ -35,6 +35,8 @@ export const updateNote = async ({ dispatch }, note) => {
     const table = await loadTable('notes');
     table.update(note);
     db.saveDatabase();
-    //获取最新笔记列表
+
     dispatch("getNotes")
+
+
 }

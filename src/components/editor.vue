@@ -3,9 +3,9 @@
     <div class="field">
       <textarea
         rows="5"
-        placeholder="今天中午老婆给你做了啥？"
-        v-model="foodcontent"
-        v-on:input="updateNote(foodupdate)"
+         v-model="foodcontent"
+         v-on:input="updateNote(foodupdate)"
+         debounce="8000"
       ></textarea>
     </div>
   </div>

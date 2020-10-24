@@ -6,16 +6,16 @@
     <div class="content">
       <a class="header" v-on:click="open = !open">{{ title || "新建笔记" }}</a>
       <div class="extra">
-        <Editor v-bind:note="note" v-if="!open"></Editor>
+        <Editor v-bind:note="note" v-if="open" />
         {{ note.food.length }} 个字;
-        <i class="right floated brown trash icon"></i>
+        <i class="right floated brown trash icon" v-if="open"></i>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Editor from "./editor";
+import Editor from "./Editor";
 import _ from "lodash";
 //import { mapGetters } from "vuex";
 
@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     title() {
-      return _.truncate(this.note.food, { length: 10 });
+      return _.truncate(this.note.food, { length: 30 });
     },
   },
   components: {
