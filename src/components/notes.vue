@@ -4,39 +4,71 @@
       <i class="paw icon"></i>
       Guo Rui's Notes
     </h4>
-    <a class="ui right floated brown button" @click="create">编辑笔记</a>
-
+    <a class="ui right floated brown button">编辑笔记</a>
+    <div class="zhong"></div>
+    <div class="ui section divider"></div>
+    <Test></Test>
+    <div class="ui section divider"></div>
+    <table class="ui definition table">
+      <tbody>
+        <tr>
+          <td class="two wide column">主题</td>
+          <td>《每日老婆餐》</td>
+        </tr>
+        <tr>
+          <td>文章个数</td>
+          <td>{{ "count" }}</td>
+        </tr>
+        <tr>
+          <td>平均阅读量</td>
+          <td>7</td>
+        </tr>
+        <tr>
+          <td>点赞数量</td>
+          <td>7</td>
+        </tr>
+      </tbody>
+    </table>
     <div class="ui divided items notelist">
-      <note
-        v-for="entity in entities"
-        v-bind:entity="entity"
-        v-bind:key="entity.index"
-      ></note>
-      <span>如果没有笔记，请点击"添加笔记"按钮</span>
+      <Note
+        v-for="note in notes"
+        v-bind:note="note"
+        v-bind:key="note.$loki"
+      ></Note>
+      <span v-if="!notes.length">如果没有笔记，请点击"添加笔记"按钮</span>
     </div>
   </div>
 </template>
 
+
+
 <script>
 import Note from "./note";
+import Test from "./test";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  created() {
-    this.initial();
+  async created() {
+    await this.getNotes();
   },
-  methods: {
-    ...mapActions(["initial", "create"]),
+  components: {
+    Test,
+    Note,
   },
   computed: {
-    ...mapGetters(["entities"]),
+    ...mapGetters(["notes"]),
   },
-  props: ["msg"],
-  components: {
-    Note,
+  methods: {
+    ...mapActions(["getNotes"]),
   },
 };
 </script>
 
-<style>
+<style scope>
+.zhong {
+  clear: both;
+}
+.definition.table {
+  margin-top: 5px;
+}
 </style>

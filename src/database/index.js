@@ -17,12 +17,15 @@ function databaseInit() {
 
 export function loadTable(tablename) {
     return new Promise((resolve) => {
-        console.log("异步动作之前开始执行");
         db.loadDatabase({}, () => {
+
+
             const note_table =
                 db.getCollection(tablename) || db.addCollection(tablename);
+
+            note_table.insert([{ food: "粉丝蒜蓉娃娃菜" }, { food: "西兰花小丸子" }])
+            db.saveDatabase()
             resolve(note_table);
         });
-        console.log("异步动作之前开始之后");
     });
 }

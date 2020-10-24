@@ -1,14 +1,25 @@
+import { loadTable } from '../database'
+
+/**
+ * 模板加载后，获取笔记列表 
+ */
+
+export const getNotes = async ({ commit }) => {
+    //加载笔记
+    const noteslist = await loadTable('notes');
 
 
-export const initial = ({ commit }) => {
-    commit("setInnitialdata")
-}
+    // noteslist.insert([{ food: "蒜蓉娃娃菜" }, { food: "凉拌西兰花" }])
+    // db.saveDatabase()
 
-export const create = ({ commit }) => {
-    commit('createdata')
-}
 
-export const update = ({ commit }, entity) => {
-    //console.log("555", entity)
-    commit('updateData', entity)
+    const notes = noteslist.chain()
+        .find()
+        .simplesort('$loki', 'isdesc')
+        .data();
+
+
+
+    //排序以后，提交修稿
+    commit('setnotes', notes)
 }
