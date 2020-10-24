@@ -18,13 +18,9 @@ function databaseInit() {
 export function loadTable(tablename) {
     return new Promise((resolve) => {
         db.loadDatabase({}, () => {
+            const note_table = db.getCollection(tablename) || db.addCollection(tablename);
 
 
-            const note_table =
-                db.getCollection(tablename) || db.addCollection(tablename);
-
-            note_table.insert([{ food: "粉丝蒜蓉娃娃菜" }, { food: "西兰花小丸子" }])
-            db.saveDatabase()
             resolve(note_table);
         });
     });

@@ -1,4 +1,4 @@
-import { loadTable } from '../database'
+import { loadTable, db } from '../database'
 
 /**
  * 模板加载后，获取笔记列表 
@@ -8,18 +8,33 @@ export const getNotes = async ({ commit }) => {
     //加载笔记
     const noteslist = await loadTable('notes');
 
-
-    // noteslist.insert([{ food: "蒜蓉娃娃菜" }, { food: "凉拌西兰花" }])
-    // db.saveDatabase()
-
-
     const notes = noteslist.chain()
         .find()
-        .simplesort('$loki', 'isdesc')
+        .simplesort('$loki', { desc: true })
         .data();
 
 
 
     //排序以后，提交修稿
     commit('setnotes', notes)
+}
+
+export const createNote = async ({ dispatch }) => {
+    const table = await loadTable('notes');
+    const noteinfo = { food: "" }
+    table.insert(noteinfo)
+    db.saveDatabase();
+    dispatch('getNotes')
+}
+
+/**
+ * 更新笔记 
+ */
+
+export const updateNote = async ({ dispatch }, note) => {
+    const table = await loadTable('notes');
+    table.update(note);
+    db.saveDatabase();
+    //获取最新笔记列表
+    dispatch("getNotes")
 }

@@ -4,7 +4,9 @@
       <i class="paw icon"></i>
       Guo Rui's Notes
     </h4>
-    <a class="ui right floated brown button">编辑笔记</a>
+    <a class="ui right floated brown button" v-on:click="createNote()"
+      >编辑笔记</a
+    >
     <div class="zhong"></div>
     <div class="ui section divider"></div>
     <Test></Test>
@@ -17,7 +19,7 @@
         </tr>
         <tr>
           <td>文章个数</td>
-          <td>{{ "count" }}</td>
+          <td>{{ count }}</td>
         </tr>
         <tr>
           <td>平均阅读量</td>
@@ -56,10 +58,10 @@ export default {
     Note,
   },
   computed: {
-    ...mapGetters(["notes"]),
+    ...mapGetters(["notes", "count"]),
   },
   methods: {
-    ...mapActions(["getNotes"]),
+    ...mapActions(["getNotes", "createNote"]),
   },
 };
 </script>

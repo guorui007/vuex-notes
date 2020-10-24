@@ -9,3 +9,7 @@ export const notes = state => {
         return note
     })
 }
+
+export const count = state => {
+    return state.notes.length
+}
